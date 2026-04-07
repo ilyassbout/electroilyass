@@ -60,6 +60,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', updateActiveLink);
 
+    // === Dark Mode Toggle ===
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply saved theme on load
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
     // === Scroll Animations (IntersectionObserver) ===
     const animateElements = document.querySelectorAll('[data-animate]');
     const observer = new IntersectionObserver((entries) => {

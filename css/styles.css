@@ -40,6 +40,26 @@
     --transition-fast: 0.2s ease;
     --transition-base: 0.3s ease;
     --transition-slow: 0.5s ease;
+
+    /* Default Light Variables */
+    --bg-white: #FFFFFF;
+    --bg-light: #F3F4F6;
+    --card-white: #FFFFFF;
+    --text-main: #2E2E2E;
+    --text-muted: #6B7280;
+    --text-heading: #0B3C5D;
+    --border-color: #E5E7EB;
+}
+
+/* === Dark Mode Variables (Selective) === */
+body.dark-mode {
+    --bg-white: #111827;
+    --bg-light: #1f2937;
+    --card-white: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --text-heading: #ffffff;
+    --border-color: #374151;
 }
 
 /* === Reset & Base === */
@@ -58,12 +78,13 @@ html {
 
 body {
     font-family: var(--font-body);
-    color: var(--gray-dark);
-    background: var(--white);
+    color: var(--text-main);
+    background: var(--bg-white);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a {
@@ -90,7 +111,7 @@ h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.2;
-    color: var(--blue-dark);
+    color: var(--text-heading);
 }
 
 /* === Utility === */
@@ -149,7 +170,7 @@ h6 {
 }
 
 .section-subtitle {
-    color: var(--gray-medium);
+    color: var(--text-muted);
     font-size: 1.05rem;
 }
 
@@ -316,8 +337,62 @@ h6 {
     background: rgba(11, 60, 93, 0.06);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .nav-cta {
     display: flex;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.navbar.scrolled .theme-toggle {
+    background: rgba(11, 60, 93, 0.05);
+    border-color: rgba(11, 60, 93, 0.1);
+    color: var(--text-heading);
+}
+
+.sun-icon {
+    display: none;
+}
+
+.moon-icon {
+    display: block;
+}
+
+body.dark-mode .sun-icon {
+    display: block;
+}
+
+body.dark-mode .moon-icon {
+    display: none;
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #fbbf24; /* Yellow for sun */
 }
 
 .hamburger {
@@ -707,7 +782,7 @@ h6 {
 
 /* === Services Section === */
 .services-section {
-    background: var(--gray-light);
+    background: var(--bg-light);
 }
 
 .services-grid {
@@ -717,13 +792,13 @@ h6 {
 }
 
 .service-card {
-    background: var(--white);
+    background: var(--card-white);
     border-radius: var(--radius-lg);
     padding: 32px 24px;
     position: relative;
     overflow: hidden;
     transition: all var(--transition-base);
-    border: 1px solid var(--gray-border);
+    border: 1px solid var(--border-color);
 }
 
 .service-card::before {
@@ -749,7 +824,7 @@ h6 {
 
 .service-card.featured {
     border: 2px solid var(--blue-light);
-    background: linear-gradient(180deg, rgba(29, 161, 242, 0.03), var(--white));
+    background: linear-gradient(180deg, rgba(29, 161, 242, 0.03), var(--card-white));
 }
 
 .service-card.featured::before {
@@ -809,13 +884,23 @@ h6 {
 }
 
 .badge-fast {
-    background: rgba(245, 158, 11, 0.1);
+    background: rgba(245, 158, 11, 0.15);
     color: var(--orange);
 }
 
 .badge-guarantee {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16, 185, 129, 0.15);
     color: var(--green);
+}
+
+body.dark-mode .badge-fast {
+    background: rgba(245, 158, 11, 0.25);
+    color: #fbbf24; /* Lighter orange for dark mode */
+}
+
+body.dark-mode .badge-guarantee {
+    background: rgba(16, 185, 129, 0.25);
+    color: #34d399; /* Lighter green for dark mode */
 }
 
 .service-card h3 {
@@ -824,7 +909,7 @@ h6 {
 }
 
 .service-card p {
-    color: var(--gray-medium);
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 16px;
     line-height: 1.6;
@@ -838,7 +923,7 @@ h6 {
 
 .service-features li {
     font-size: 0.85rem;
-    color: var(--gray-medium);
+    color: var(--text-main);
     padding-left: 20px;
     position: relative;
 }
@@ -866,8 +951,8 @@ h6 {
     text-align: center;
     padding: 40px 24px;
     border-radius: var(--radius-lg);
-    background: var(--white);
-    border: 1px solid var(--gray-border);
+    background: var(--card-white);
+    border: 1px solid var(--border-color);
     transition: all var(--transition-base);
 }
 
@@ -907,14 +992,14 @@ h6 {
 }
 
 .why-card p {
-    color: var(--gray-medium);
+    color: var(--text-muted);
     font-size: 0.9rem;
     line-height: 1.6;
 }
 
 /* === Products Section === */
 .products-section {
-    background: var(--gray-light);
+    background: var(--bg-light);
 }
 
 .products-filter {
@@ -931,9 +1016,9 @@ h6 {
     font-size: 0.9rem;
     padding: 10px 24px;
     border-radius: var(--radius-full);
-    border: 1px solid var(--gray-border);
-    background: var(--white);
-    color: var(--gray-medium);
+    border: 1px solid var(--border-color);
+    background: var(--card-white);
+    color: var(--text-muted);
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -957,11 +1042,11 @@ h6 {
 }
 
 .product-card {
-    background: var(--white);
+    background: var(--card-white);
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: all var(--transition-base);
-    border: 1px solid var(--gray-border);
+    border: 1px solid var(--border-color);
 }
 
 .product-card:hover {
@@ -1018,7 +1103,7 @@ h6 {
 
 .product-description {
     font-size: 0.85rem;
-    color: var(--gray-medium);
+    color: var(--text-muted);
     margin-bottom: 12px;
     line-height: 1.5;
     display: -webkit-box;
@@ -1035,7 +1120,7 @@ h6 {
 
 .product-details li {
     font-size: 0.78rem;
-    color: var(--gray-dark);
+    color: var(--text-main);
     margin-bottom: 4px;
     display: flex;
     align-items: center;
@@ -1072,6 +1157,11 @@ h6 {
     border-radius: var(--radius-full);
     background: linear-gradient(135deg, rgba(29, 161, 242, 0.1), rgba(11, 60, 93, 0.05));
     color: var(--blue-light);
+}
+
+body.dark-mode .product-tag {
+    background: rgba(29, 161, 242, 0.2);
+    color: #60a5fa; /* Lighter blue for dark mode */
 }
 
 /* === Brands Section === */
@@ -1174,8 +1264,8 @@ h6 {
 }
 
 .contact-form-wrapper {
-    background: var(--white);
-    border: 1px solid var(--gray-border);
+    background: var(--card-white);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 40px;
 }
@@ -1191,7 +1281,7 @@ h6 {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--blue-dark);
+    color: var(--text-heading);
     margin-bottom: 8px;
 }
 
@@ -1199,20 +1289,20 @@ h6 {
 .form-group textarea {
     width: 100%;
     padding: 14px 18px;
-    border: 1.5px solid var(--gray-border);
+    border: 1.5px solid var(--border-color);
     border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 0.95rem;
-    color: var(--gray-dark);
+    color: var(--text-main);
     transition: all var(--transition-fast);
-    background: var(--gray-light);
+    background: var(--bg-light);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--blue-light);
-    background: var(--white);
+    background: var(--card-white);
     box-shadow: 0 0 0 4px rgba(29, 161, 242, 0.1);
 }
 
@@ -1296,7 +1386,7 @@ h6 {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    border: 1px solid var(--gray-border);
+    border: 1px solid var(--border-light);
 }
 
 /* === Footer === */
@@ -1511,7 +1601,7 @@ h6 {
         right: -100%;
         width: 280px;
         height: 100vh;
-        background: var(--white);
+        background: var(--bg-white);
         flex-direction: column;
         align-items: flex-start;
         padding: 100px 32px 32px;
@@ -1526,7 +1616,7 @@ h6 {
     }
 
     .nav-link {
-        color: var(--gray-dark);
+        color: var(--text-main);
         font-size: 1rem;
         padding: 12px 16px;
         width: 100%;
@@ -1542,8 +1632,16 @@ h6 {
         display: none;
     }
 
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        order: 2;
+    }
+
     .hamburger {
         display: flex;
+        order: 3;
     }
 
     /* Hero */
