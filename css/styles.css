@@ -1164,6 +1164,13 @@ body.dark-mode .product-tag {
     color: #60a5fa; /* Lighter blue for dark mode */
 }
 
+/* Order button inside product cards */
+.product-order-btn {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
 /* === Brands Section === */
 .brands-section {
     padding: 60px 0;
